@@ -7,6 +7,7 @@ Oracle Integration REST APIs as well as REST endpoints exposed in integrations a
 OIC is enabled to use a service account in which the password does not expire. The service account consists of a generic application role created with specific predefined rules. Use this account when you need to invoke integrations and require that the account password does not expire.
 
 - [Creating a service account for OIC](#creating-a-service-account-for-oic)
+- [Best Practices](#best-practices)
 - [References and Inspiration](#references-and-inspiration)
 --------------------------------------------------------------------------------------
 
