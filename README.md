@@ -1,9 +1,10 @@
 # Trigger OIC endpoints with a service account without password expiration
 
 Authentication and authorization in Oracle Integration (OIC) is managed by Oracle Identity Cloud Service (IDCS).
-Oracle Integration REST APIs as well as REST endpoints exposed in integrations are protected using the OAuth token-based authentication.
 
-By default, all the OIC inbound endpoints require authentication and authorization.
+Oracle Integration REST APIs as well as REST endpoints exposed in integrations are by default protected and require authentication and authorization.
+
+OIC is enabled to use a service account in which the password does not expire. The service account consists of a generic application role created with specific predefined rules. Use this account when you need to invoke integrations and require that the account password does not expire.
 
 - [Creating a service account for OIC](#creating-a-service-account-for-oic)
 - [References and Inspiration](#references-and-inspiration)
@@ -57,6 +58,11 @@ A similar setup can be used to create an Application to be used with the Service
 Use the Postman Collection to invoke an OIC integration. The sample Echo is included in the collection.
 Choose Authorization type: Basic Authentication with Username: ${ST_CLIENT_ID} and Password: ${ST_CLIENT_SECRET}.
 Request: Echo
+
+### Best practices
+- Use dedicated service accounts per client system/app. E.g. for ERP, HCM, EBS, 3rd party REST clients etc.
+- Use dedicated service accounts per environment. E.g. Dev, Test, Prod
+- Regenerate the CLIENT_SECRET for the service accounts, as needed based on your organization's security strategy.
 
 --------------------------------------------------------------------------------------
 
