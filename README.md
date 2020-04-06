@@ -1,1 +1,62 @@
-# postman-oic-service-account
+# Trigger OIC endpoints with a service account without password expiration
+
+Authentication and authorization in Oracle Integration (OIC) is managed by Oracle Identity Cloud Service (IDCS).
+Oracle Integration REST APIs as well as REST endpoints exposed in integrations are protected using the OAuth token-based authentication.
+
+By default, all the OIC inbound endpoints require authentication and authorization.
+
+--------------------------------------------------------------------------------------
+
+## Creating a service account for OIC
+
+The service account is implemented as an IDCS confidential application.
+By enabling the application with Client Credentials and JWT Assertion, the CLIENT_ID and CLIENT_SECRET can be used for Basic Authentication. The CLIENT_SECRET does not expire and can be regenerated on demand.
+
+The method is described in the OIC documentation, [here](https://docs.oracle.com/en/cloud/paas/integration-cloud/integration-cloud-auton/use-service-integration-account-no-password-expiration.html).
+
+### Prerequisites
+- A user with IDCS administrator role.
+- An OIC instance.
+- A user with administrator role for the OIC instance.
+- Postman Collection: [Trigger OIC integrations with an account without password expiration.postman_collection.json](/Trigger%20OIC%20integrations%20with%20an%20account%20without%20password%20expiration.postman_collection.json)
+
+### Step 1. Create an IDCS Administrator Application
+1. Login to IDCS as a user with IDCS administrator role.
+1. Create a Confidential Application
+    1. Name: OIC IDCS Administrator
+    1. Allowed Grant Types: Client Credentials, Refresh Token
+    1. Client Configuration > Token Issuance Policy > Grant the client access to Identity Cloud Service Admin APIs > App Roles: Identity Domain Administrator
+    1. Note the Client ID and Client Secret: ${SA_CLIENT_ID} and ${SA_CLIENT_SECRET}
+1. Activate the Application
+1. Obtain an access token by using the Postman Collection: __Request:__ Obtain access_token (client credentials)
+
+### Step 2. Create an OIC Client Application
+Create a Confidential Application, by using the Postman Collection: __Request:__ Create a confidential client app - OIC_BASICAUTH
+
+Description
+- Display Name: OIC Trigger via Basic Auth
+- Description: This client is used to allow REST-based OIC endpoints to the triggered using IDCS Client Credentials.
+- Name: OIC_BASICAUTH. [To Be Investigated] Some restrictions apply to the name: according to documentation, use the suffix \_BASICAUTH. Empiric observation: OIC invocation fails with a 401-Unauthorized exception if the suffix is different.
+- Allowed Grant Types: Client Credentials, JWT Assertion
+- Note the Client ID and Client Secret: ${ST_CLIENT_ID} and ${ST_CLIENT_SECRET}
+
+### Step 3. Grant the role ServiceUser to the OIC Client Application
+
+1. Login to IDCS as a user with administrator role for the OIC instance.
+2. Open the Application of the OIC instance, typically named OICINST_\<InstanceName\>.
+3. Alternative to Steps 1 and 2 is to open the application by clicking on the IDCS Application link, available on the OIC instance overview.
+4. Go to Application Roles > ServiceUser and assign the OIC Client Application.
+
+N.B. The ServiceUser role can invoke both the Oracle Integration REST APIs as well as REST endpoints exposed in integrations.
+A similar setup can be used to create an Application to be used with the ServiceInvoker role, which gives access only to the REST endpoints exposed in integrations.
+
+### Step 4. Test an OIC integration
+Use the Postman Collection to invoke an OIC integration. The sample Echo is included in the collection.
+Choose Authorization type: Basic Authentication with Username: ${ST_CLIENT_ID} and Password: ${ST_CLIENT_SECRET}.
+Request: Echo
+
+--------------------------------------------------------------------------------------
+
+## References and Inspiration
+- Oracle Cloud Documentation > Administering Oracle Integration > [Use the Service Integration Account with No Password Expiration](https://docs.oracle.com/en/cloud/paas/integration-cloud/integration-cloud-auton/use-service-integration-account-no-password-expiration.html)
+- IDCS REST APIs [Postman Collection](https://github.com/oracle/idm-samples/tree/master/idcs-rest-clients)
