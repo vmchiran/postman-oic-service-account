@@ -5,11 +5,14 @@ Oracle Integration REST APIs as well as REST endpoints exposed in integrations a
 
 By default, all the OIC inbound endpoints require authentication and authorization.
 
+- [Creating a service account for OIC](#creating-a-service-account-for-oic)
+- [References and Inspiration](#references-and-inspiration)
 --------------------------------------------------------------------------------------
 
 ## Creating a service account for OIC
 
 The service account is implemented as an IDCS confidential application.
+
 By enabling the application with Client Credentials and JWT Assertion, the CLIENT_ID and CLIENT_SECRET can be used for Basic Authentication. The CLIENT_SECRET does not expire and can be regenerated on demand.
 
 The method is described in the OIC documentation, [here](https://docs.oracle.com/en/cloud/paas/integration-cloud/integration-cloud-auton/use-service-integration-account-no-password-expiration.html).
