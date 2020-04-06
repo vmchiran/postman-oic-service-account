@@ -59,7 +59,9 @@ Use the Postman Collection to invoke an OIC integration. The sample Echo is incl
 Choose Authorization type: Basic Authentication with Username: ${ST_CLIENT_ID} and Password: ${ST_CLIENT_SECRET}.
 Request: Echo
 
-### Best practices
+--------------------------------------------------------------------------------------
+
+## Best Practices
 - Use dedicated service accounts per client system/app. E.g. for ERP, HCM, EBS, 3rd party REST clients etc.
 - Use dedicated service accounts per environment. E.g. Dev, Test, Prod
 - Regenerate the CLIENT_SECRET for the service accounts, as needed based on your organization's security strategy.
