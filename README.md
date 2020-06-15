@@ -8,7 +8,7 @@ OIC is enabled to use a service account in which the password does not expire. T
 
 - [Creating a service account for OIC](#creating-a-service-account-for-oic)
 - [Best Practices](#best-practices)
-- [References and Inspiration](#references-and-inspiration)
+- [References](#references)
 --------------------------------------------------------------------------------------
 
 ## Creating a service account for OIC
@@ -23,7 +23,8 @@ The method is described in the OIC documentation, [here](https://docs.oracle.com
 - A user with IDCS administrator role.
 - An OIC instance.
 - A user with administrator role for the OIC instance.
-- Postman Collection: [Trigger OIC integrations with an account without password expiration.postman_collection.json](/Trigger%20OIC%20integrations%20with%20an%20account%20without%20password%20expiration.postman_collection.json)
+- Import the Collection and Environment in Postman
+- Modify the Environment and set the values for the variables.
 
 ### Step 1. Create an IDCS Administrator Application
 1. Login to IDCS as a user with IDCS administrator role.
@@ -33,15 +34,16 @@ The method is described in the OIC documentation, [here](https://docs.oracle.com
     1. Client Configuration > Token Issuance Policy > Grant the client access to Identity Cloud Service Admin APIs > App Roles: Identity Domain Administrator
     1. Note the Client ID and Client Secret: ${SA_CLIENT_ID} and ${SA_CLIENT_SECRET}
 1. Activate the Application
-1. Obtain an access token by using the Postman Collection: __Request:__ Obtain access_token (client credentials)
+
+![Obtain an access token by using the Postman Collection. __Request:__ Obtain access_token (client credentials)](media/access-token.png)
 
 ### Step 2. Create an OIC Client Application
-Create a Confidential Application, by using the Postman Collection: __Request:__ Create a confidential client app - OIC_BASICAUTH
+![Create a Confidential Application, by using the Postman Collection. __Request:__ Create a confidential client app - OIC_BASICAUTH](media/oic-client-app.png)
 
 Description
 - Display Name: OIC Trigger via Basic Auth
 - Description: This client is used to allow REST-based OIC endpoints to the triggered using IDCS Client Credentials.
-- Name: OIC_BASICAUTH. [To Be Investigated] Some restrictions apply to the name: according to documentation, use the suffix \_BASICAUTH. Empiric observation: OIC invocation fails with a 401-Unauthorized exception if the suffix is different.
+- Name: OIC_BASICAUTH. Some restrictions apply to the name: according to documentation, use the suffix \_BASICAUTH. Empiric observation: OIC invocation fails with a 401-Unauthorized exception if the suffix is different.
 - Allowed Grant Types: Client Credentials, JWT Assertion
 - Note the Client ID and Client Secret: ${ST_CLIENT_ID} and ${ST_CLIENT_SECRET}
 
@@ -69,6 +71,6 @@ Request: Echo
 
 --------------------------------------------------------------------------------------
 
-## References and Inspiration
+## References
 - Oracle Cloud Documentation > Administering Oracle Integration > [Use the Service Integration Account with No Password Expiration](https://docs.oracle.com/en/cloud/paas/integration-cloud/integration-cloud-auton/use-service-integration-account-no-password-expiration.html)
 - IDCS REST APIs [Postman Collection](https://github.com/oracle/idm-samples/tree/master/idcs-rest-clients)
