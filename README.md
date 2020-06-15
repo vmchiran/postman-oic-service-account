@@ -34,11 +34,14 @@ The method is described in the OIC documentation, [here](https://docs.oracle.com
     1. Client Configuration > Token Issuance Policy > Grant the client access to Identity Cloud Service Admin APIs > App Roles: Identity Domain Administrator
     1. Note the Client ID and Client Secret: ${SA_CLIENT_ID} and ${SA_CLIENT_SECRET}
 1. Activate the Application
+1. Obtain an access token by using the Postman Collection. __Request:__ Obtain access_token (client credentials
 
-![Obtain an access token by using the Postman Collection. __Request:__ Obtain access_token (client credentials)](media/access-token.png)
+![Obtain an access token](media/access-token.png)
 
 ### Step 2. Create an OIC Client Application
-![Create a Confidential Application, by using the Postman Collection. __Request:__ Create a confidential client app - OIC_BASICAUTH](media/oic-client-app.png)
+Create a Confidential Application, by using the Postman Collection. __Request:__ Create a confidential client app - OIC_BASICAUTH
+
+[Create a Confidential Application](media/oic-client-app.png)
 
 Description
 - Display Name: OIC Trigger via Basic Auth
