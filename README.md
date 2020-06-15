@@ -41,7 +41,7 @@ The method is described in the OIC documentation, [here](https://docs.oracle.com
 ### Step 2. Create an OIC Client Application
 Create a Confidential Application, by using the Postman Collection. __Request:__ Create a confidential client app - OIC_BASICAUTH
 
-[Create a Confidential Application](media/oic-client-app.png)
+![Create a Confidential Application](media/oic-client-app.png)
 
 Description
 - Display Name: OIC Trigger via Basic Auth
