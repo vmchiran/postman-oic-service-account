@@ -4,7 +4,7 @@ Authentication and authorization in Oracle Integration (OIC) is managed by Oracl
 
 Oracle Integration REST APIs as well as REST endpoints exposed in integrations are by default protected and require authentication and authorization.
 
-OIC is enabled to use a service account in which the password does not expire. The service account consists of a generic application role created with specific predefined rules. Use this account when you need to invoke integrations and require that the account password does not expire.
+OIC supports authentication with a service account in which the password does not expire, by using an IDCS confidential application.
 
 - [Creating a service account for OIC](#creating-a-service-account-for-oic)
 - [Best Practices](#best-practices)
