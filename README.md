@@ -6,11 +6,18 @@ Oracle Integration REST APIs as well as REST endpoints exposed in integrations a
 
 OIC supports authentication with a service account in which the password does not expire, by using an IDCS confidential application.
 
+- [Disclaimer](#disclaimer)
 - [Creating a service account for OIC](#creating-a-service-account-for-oic)
-- [Best Practices](#best-practices)
+- [Considerations](#considerations)
 - [References](#references)
+
 --------------------------------------------------------------------------------------
 
+## Disclaimer
+- The views expressed herein are those of the author.
+- Any action you take upon the information on this repository is strictly at your own risk.
+
+--------------------------------------------------------------------------------------
 ## Creating a service account for OIC
 
 The service account is implemented as an IDCS confidential application.
@@ -66,7 +73,7 @@ Request: Echo
 
 --------------------------------------------------------------------------------------
 
-## Disclaimer
+## Considerations
 - Having a service account without password expiration can raise security issues. Always be careful when using this approach and avoid sharing the service account credentials (client id and client secret) with human users.
 - The service account without password expiration can help with the OIC connectivity agent, which supports only basic authentication and can benefit from the service account.
 - Regenerate the CLIENT_SECRET for the service accounts, as needed based on your organization's security strategy.
