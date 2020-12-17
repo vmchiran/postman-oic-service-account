@@ -34,7 +34,7 @@ The method is described in the OIC documentation, [here](https://docs.oracle.com
     1. Client Configuration > Token Issuance Policy > Grant the client access to Identity Cloud Service Admin APIs > App Roles: Identity Domain Administrator
     1. Note the Client ID and Client Secret: ${SA_CLIENT_ID} and ${SA_CLIENT_SECRET}
 1. Activate the Application
-1. Obtain an access token by using the Postman Collection. __Request:__ Obtain access_token (client credentials
+1. Obtain an access token by using the Postman Collection. __Request:__ Obtain access_token (client credentials)
 
 ![Obtain an access token](media/access-token.png)
 
@@ -45,8 +45,7 @@ Create a Confidential Application, by using the Postman Collection. __Request:__
 
 Description
 - Display Name: OIC Trigger via Basic Auth
-- Description: This client is used to allow REST-based OIC endpoints to the triggered using IDCS Client Credentials.
-- Name: OIC_BASICAUTH. Some restrictions apply to the name: according to documentation, use the suffix \_BASICAUTH. Empiric observation: OIC invocation fails with a 401-Unauthorized exception if the suffix is different.
+- Name: OIC_BASICAUTH. NB! According to OIC documentation, you have to use the suffix \_BASICAUTH. Empiric observation: OIC invocation fails with a 401-Unauthorized exception if the suffix is different.
 - Allowed Grant Types: Client Credentials, JWT Assertion
 - Note the Client ID and Client Secret: ${ST_CLIENT_ID} and ${ST_CLIENT_SECRET}
 
@@ -67,13 +66,15 @@ Request: Echo
 
 --------------------------------------------------------------------------------------
 
-## Best Practices
-- Use dedicated service accounts per client system/app. E.g. for ERP, HCM, EBS, 3rd party REST clients etc.
-- Use dedicated service accounts per environment. E.g. Dev, Test, Prod
+## Disclaimer
+- Having a service account without password expiration can raise security issues. Always be careful when using this approach and avoid sharing the service account credentials (client id and client secret) with human users.
+- The service account without password expiration can help with the OIC connectivity agent, which supports only basic authentication and can benefit from the service account.
 - Regenerate the CLIENT_SECRET for the service accounts, as needed based on your organization's security strategy.
+- Whenever possible, use more secure authentication mechanisms. For human users, continue using basic authentication and password policies such as expiration and locking after unsuccessful login. OIC supports also OAuth 2.0, which you can leverage for machine-to-machine or system-to-system integrations.
 
 --------------------------------------------------------------------------------------
 
 ## References
 - Oracle Cloud Documentation > Administering Oracle Integration > [Use the Service Integration Account with No Password Expiration](https://docs.oracle.com/en/cloud/paas/integration-cloud/integration-cloud-auton/use-service-integration-account-no-password-expiration.html)
 - IDCS REST APIs [Postman Collection](https://github.com/oracle/idm-samples/tree/master/idcs-rest-clients)
+- https://www.ateam-oracle.com/trigger-oic-integration-using-oauth-client-credentials
